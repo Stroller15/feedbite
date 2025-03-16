@@ -1,0 +1,61 @@
+
+/* LinkedIn Summarizer styles */
+.summary-panel {
+  position: absolute;
+  right: 16px;
+  top: 56px;
+  max-width: 360px;
+  width: calc(100% - 32px);
+  z-index: 10;
+  background-color: white;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(214, 222, 235, 0.6);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.summary-panel.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.summary-panel.hide {
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+}
+
+.summary-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.summarize-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: transparent;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.summarize-btn:hover {
+  background-color: rgba(0, 119, 181, 0.05);
+  color: #0077b5;
+}
+
+.summarize-btn-icon {
+  width: 14px;
+  height: 14px;
+}

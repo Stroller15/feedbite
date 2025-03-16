@@ -10,6 +10,13 @@ import { Badge } from '@/components/ui/badge';
 const Index = () => {
   const [activeSection, setActiveSection] = useState('demo');
 
+  const handleInstallClick = () => {
+    // In production, this would be the Chrome Web Store URL
+    // For now, we'll use a direct download link to the extension ZIP
+    const extensionUrl = '/linkedin-summarizer-extension.zip';
+    window.open(extensionUrl, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <header className="relative z-10 px-6 lg:px-8 pt-6 pb-4 border-b border-blue-100/60">
@@ -42,6 +49,7 @@ const Index = () => {
             <Button 
               variant="outline" 
               className="text-sm font-medium border-blue-200 text-linkedin-blue hover:bg-blue-50 transition-colors"
+              onClick={handleInstallClick}
             >
               Install Extension
               <ExternalLinkIcon className="ml-2 h-4 w-4" />
