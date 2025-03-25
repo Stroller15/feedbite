@@ -6,6 +6,7 @@ import ExtensionDemo from '@/components/ExtensionDemo';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('demo');
@@ -18,12 +19,12 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col">
       <header className="relative z-10 px-6 lg:px-8 pt-6 pb-4 border-b border-blue-100/60">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <FileTextIcon className="w-5 h-5 text-linkedin-blue" />
-            <h1 className="text-xl font-medium text-gray-900">LinkedIn Summarizer</h1>
+            <h1 className="text-xl font-medium text-gray-900">Feedbite</h1>
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <button 
@@ -58,7 +59,7 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="relative z-0">
+      <main className="relative z-0 flex-grow">
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
@@ -111,9 +112,8 @@ const Index = () => {
               
               {activeSection === 'about' && (
                 <div className="max-w-3xl mx-auto prose prose-blue">
-                  <h3>About LinkedIn Summarizer</h3>
                   <p>
-                    LinkedIn Summarizer is a Chrome extension designed to help professionals save time while browsing their feed. 
+                    Feedbite is a Chrome extension designed to help professionals save time while browsing their feed. 
                     Our mission is to help you extract value from LinkedIn content without getting lost in lengthy posts.
                   </p>
                   <p>
@@ -130,14 +130,14 @@ const Index = () => {
         </section>
       </main>
 
-      <footer className="border-t border-blue-100/60 py-8 px-4 sm:px-6 lg:px-8">
+      <footer className="border-t border-blue-100/60 py-8 px-4 sm:px-6 lg:px-8 mt-auto">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <FileTextIcon className="w-5 h-5 text-linkedin-blue" />
-            <span className="text-sm font-medium text-gray-600">LinkedIn Summarizer</span>
+            <span className="text-sm font-medium text-gray-600">Feedbite</span>
           </div>
-          <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} LinkedIn Summarizer. All rights reserved.
+          <div className="text-sm text-gray-500 underline cursor-pointer">
+            <Link target='_blank' to="https://www.linkedin.com/in/a-shubham-verma">Built by Shubham Verma</Link>
           </div>
         </div>
       </footer>
