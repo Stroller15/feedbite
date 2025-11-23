@@ -1,4 +1,3 @@
-
 {
   "manifest_version": 3,
   "name": "LinkedIn Summarizer",
@@ -15,16 +14,23 @@
   },
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "host_permissions": [
     "https://*.linkedin.com/*"
   ],
   "content_scripts": [
     {
-      "matches": ["https://*.linkedin.com/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"]
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
     }
   ]
 }

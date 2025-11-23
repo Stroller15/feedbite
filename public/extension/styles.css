@@ -3,45 +3,52 @@
 .summarize-btn {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
-  background: white;
-  border: 1px solid #0a66c2;
-  border-radius: 16px;
+  justify-content: center;
+  padding: 6px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
   color: #0a66c2;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  margin-left: 12px;
+  /* Fallback */
+  color: var(--color-action, #0a66c2);
+  /* Try to use LinkedIn's variable */
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 4px;
+  /* Nudge down for visual alignment */
 }
 
 .summarize-btn:hover {
-  background: rgba(10, 102, 194, 0.05);
+  background-color: rgba(112, 181, 249, 0.2);
 }
 
 .summarize-btn-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
   stroke: currentColor;
+  stroke-width: 2;
 }
 
 .summary-panel {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: calc(100% + 12px);
   right: 0;
+  width: 400px;
+  max-width: 90vw;
   background: white;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  margin: 12px 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   opacity: 0;
   transform: translateY(-10px);
   transition: all 0.3s ease;
   z-index: 1000;
   font-family: 'Poppins', sans-serif;
+  text-align: left;
 }
 
 .summary-panel.show {
@@ -67,6 +74,8 @@
   align-items: center;
   gap: 8px;
   font-weight: 500;
+  font-size: 15px;
+  /* Increased from 16px */
   color: #333;
 }
 
@@ -86,16 +95,19 @@
 }
 
 .summary-text {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.5;
+  font-size: 16px;
+  /* Increased from 14px */
+  color: #4a4a4a;
+  line-height: 1.6;
   margin: 0;
 }
 
 .close-btn {
-  width: 32px;
-  height: 32px;
-  padding: 8px;
+  width: 40px;
+  /* Increased from 32px */
+  height: 40px;
+  /* Increased from 32px */
+  padding: 0;
   border-radius: 50%;
   border: none;
   background: transparent;
@@ -105,10 +117,13 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s ease;
+  font-size: 24px;
+  /* Ensure icon is large enough */
 }
 
 .close-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #333;
 }
 
 .spinner {
@@ -121,6 +136,11 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
