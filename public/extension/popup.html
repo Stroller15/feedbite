@@ -37,7 +37,16 @@
 
     <div class="form-group" id="apiKeyGroup">
       <label for="apiKey">API Key</label>
-      <input type="password" id="apiKey" placeholder="Enter your API key" />
+      <div class="input-with-button">
+        <input type="password" id="apiKey" placeholder="Enter your API key" />
+        <button id="removeKeyBtn" class="icon-btn" title="Remove API Key" style="display: none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"></path>
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
       <p class="help-text" id="keyHelp">Get your key from <a href="https://console.groq.com/keys"
           target="_blank">console.groq.com</a></p>
     </div>

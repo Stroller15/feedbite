@@ -1,18 +1,12 @@
-
 /* LinkedIn Summarizer styles */
 .summary-panel {
-  position: absolute;
-  right: 16px;
-  top: 56px;
   max-width: 360px;
-  width: calc(100% - 32px);
-  z-index: 10;
   background-color: white;
   border-radius: 0.75rem;
   border: 1px solid rgba(214, 222, 235, 0.6);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .summary-panel.show {

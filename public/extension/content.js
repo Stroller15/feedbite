@@ -185,13 +185,15 @@ function addSummarizeButton(post, container, text, referenceNode = null) {
       closeModal(activeModal);
     }
 
-    const existingPanel = container.querySelector('.summary-panel');
-    if (existingPanel) {
+    // Check if panel exists
+    const existingPanel = container._feedbitePanel;
+    if (existingPanel && document.body.contains(existingPanel)) {
       togglePanel(existingPanel);
       return;
     }
 
-    const panel = createSummaryPanel(container);
+    const panel = createSummaryPanel(container, post, button);
+    container._feedbitePanel = panel;
     activeModal = panel;
     showLoadingState(panel);
 
@@ -352,17 +354,65 @@ async function handleApiResponse(response) {
 }
 
 // Create a summary panel for a post
-function createSummaryPanel(container) {
+// Create a summary panel for a post
+function createSummaryPanel(container, post, button) {
   const panel = document.createElement('div');
   panel.className = 'summary-panel';
 
-  // Ensure container has relative positioning for absolute child
-  const computedStyle = window.getComputedStyle(container);
-  if (computedStyle.position === 'static') {
-    container.style.position = 'relative';
-  }
+  // Append to body
+  document.body.appendChild(panel);
 
-  container.appendChild(panel);
+  // Positioning logic using requestAnimationFrame for smooth tracking
+  // This handles window scroll, sub-container scroll, resizing, and layout shifts perfectly
+  const updatePositionLoop = () => {
+    // Stop if panel is removed or hidden
+    if (!panel.parentElement || panel.classList.contains('hide')) {
+      return;
+    }
+
+    const btnRect = button.getBoundingClientRect();
+
+    // If button is off-screen or hidden, we might want to close or hide, 
+    // but for now let's just keep tracking.
+    // If button is removed from DOM:
+    if (btnRect.width === 0 && btnRect.height === 0) {
+      return;
+    }
+
+    // Use Fixed positioning for rock-solid tracking
+    panel.style.position = 'fixed';
+    panel.style.top = `${btnRect.bottom + 8}px`; // 8px gap
+    panel.style.zIndex = '10000';
+
+    // Width
+    const width = Math.min(360, window.innerWidth - 32);
+    panel.style.width = `${width}px`;
+
+    // Align right edge of panel with right edge of button
+    let left = btnRect.right - width;
+
+    // Boundary check
+    if (left < 16) left = 16;
+
+    panel.style.left = `${left}px`;
+
+    // Optional: Hide if button scrolls far off screen to prevent weird floating
+    if (btnRect.bottom < 0 || btnRect.top > window.innerHeight) {
+      panel.style.opacity = '0';
+      panel.style.pointerEvents = 'none';
+    } else {
+      // Only restore if we are in 'show' state
+      if (panel.classList.contains('show')) {
+        panel.style.opacity = '1';
+        panel.style.pointerEvents = 'auto';
+      }
+    }
+
+    panel._animationFrameId = requestAnimationFrame(updatePositionLoop);
+  };
+
+  // Start loop
+  updatePositionLoop();
 
   // Trigger animation
   requestAnimationFrame(() => {
@@ -376,6 +426,12 @@ function togglePanel(panel) {
   if (panel.classList.contains('show')) {
     closeModal(panel);
   } else {
+    // Cancel any pending close
+    if (panel._closeTimeout) {
+      clearTimeout(panel._closeTimeout);
+      panel._closeTimeout = null;
+    }
+    panel.classList.remove('hide');
     panel.classList.add('show');
     activeModal = panel;
   }
@@ -385,14 +441,24 @@ function closeModal(panel) {
   panel.classList.remove('show');
   panel.classList.add('hide');
 
+  // Remove event listeners
+  if (panel._animationFrameId) {
+    cancelAnimationFrame(panel._animationFrameId);
+    panel._animationFrameId = null;
+  }
+
+  // Clear any existing timeout
+  if (panel._closeTimeout) clearTimeout(panel._closeTimeout);
+
   // Remove from DOM after animation
-  setTimeout(() => {
+  panel._closeTimeout = setTimeout(() => {
     if (panel.parentNode) {
       panel.parentNode.removeChild(panel);
     }
     if (activeModal === panel) {
       activeModal = null;
     }
+    panel._closeTimeout = null;
   }, 300);
 }
 

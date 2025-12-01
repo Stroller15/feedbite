@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const providerSelect = document.getElementById('provider');
   const apiKeyInput = document.getElementById('apiKey');
+  const removeKeyBtn = document.getElementById('removeKeyBtn');
   const modelInput = document.getElementById('model');
   const saveBtn = document.getElementById('saveBtn');
   const status = document.getElementById('status');
@@ -38,7 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load key for current provider
     const keyName = `${currentProvider}ApiKey`;
-    apiKeyInput.value = result[keyName] || '';
+    const savedKey = result[keyName] || '';
+    apiKeyInput.value = savedKey;
+    toggleRemoveBtn(savedKey);
 
     if (result.customModel) {
       modelInput.value = result.customModel;
@@ -52,7 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Try to load saved key for this provider
     chrome.storage.local.get([`${provider}ApiKey`], (result) => {
-      apiKeyInput.value = result[`${provider}ApiKey`] || '';
+      const savedKey = result[`${provider}ApiKey`] || '';
+      apiKeyInput.value = savedKey;
+      toggleRemoveBtn(savedKey);
     });
   });
 
@@ -62,6 +67,36 @@ document.addEventListener('DOMContentLoaded', () => {
     keyHelp.innerHTML = `Get your key from <a href="${config.helpUrl}" target="_blank">${config.helpText}</a>`;
     modelInput.placeholder = `Default: ${config.defaultModel}`;
   }
+
+  function toggleRemoveBtn(value) {
+    removeKeyBtn.style.display = value ? 'flex' : 'none';
+  }
+
+  // Handle input changes to show/hide remove button
+  apiKeyInput.addEventListener('input', (e) => {
+    toggleRemoveBtn(e.target.value);
+  });
+
+  // Remove key
+  removeKeyBtn.addEventListener('click', () => {
+    const provider = providerSelect.value;
+    apiKeyInput.value = '';
+    toggleRemoveBtn('');
+
+    // Clear from storage immediately
+    const settings = {};
+    settings[`${provider}ApiKey`] = '';
+
+    chrome.storage.local.set(settings, () => {
+      showStatus('API Key removed', 'success');
+      // Notify content script
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        if (tabs[0]) {
+          chrome.tabs.sendMessage(tabs[0].id, { action: "settingsUpdated" });
+        }
+      });
+    });
+  });
 
   // Save settings
   saveBtn.addEventListener('click', () => {
