@@ -12,7 +12,7 @@ const Index = () => {
   const headerShadow = useTransform(scrollY, [0, 50], ['none', '0 4px 20px -2px rgba(0, 0, 0, 0.05)']);
 
   const handleInstallClick = () => {
-    const extensionUrl = '/linkedin-summarizer-extension.zip';
+    const extensionUrl = 'https://chromewebstore.google.com/detail/mnbbbmdiphmdplpgoligldmnifckogfc';
     window.open(extensionUrl, '_blank');
   };
 
