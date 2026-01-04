@@ -1,26 +1,45 @@
-
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { FileTextIcon, ZapIcon, ShieldCheckIcon, LayoutIcon, ArrowRightIcon, ChromeIcon, StarIcon, CheckCircleIcon } from 'lucide-react';
-import ExtensionDemo from '@/components/ExtensionDemo';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  FileTextIcon,
+  ZapIcon,
+  ShieldCheckIcon,
+  LayoutIcon,
+  ArrowRightIcon,
+  ChromeIcon,
+  StarIcon,
+  CheckCircleIcon,
+} from "lucide-react";
+import ExtensionDemo from "@/components/ExtensionDemo";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 50], [0, 1]);
-  const headerShadow = useTransform(scrollY, [0, 50], ['none', '0 4px 20px -2px rgba(0, 0, 0, 0.05)']);
+  const headerShadow = useTransform(
+    scrollY,
+    [0, 50],
+    ["none", "0 4px 20px -2px rgba(0, 0, 0, 0.05)"]
+  );
 
   const handleInstallClick = () => {
-    const extensionUrl = 'https://chromewebstore.google.com/detail/mnbbbmdiphmdplpgoligldmnifckogfc';
-    window.open(extensionUrl, '_blank');
+    const extensionUrl =
+      "https://chromewebstore.google.com/detail/mnbbbmdiphmdplpgoligldmnifckogfc";
+    window.open(extensionUrl, "_blank");
   };
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-linkedin-blue/20 selection:text-linkedin-blue">
       {/* Floating Header */}
       <motion.header
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0,0,0,0.05)', boxShadow: headerShadow }}
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(0,0,0,0.05)",
+          boxShadow: headerShadow,
+        }}
         className="fixed top-0 left-0 right-0 z-50 px-6 h-16 flex items-center justify-between transition-all duration-300"
       >
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
@@ -28,13 +47,30 @@ const Index = () => {
             <div className="bg-linkedin-blue text-white p-1.5 rounded-lg">
               <FileTextIcon className="w-5 h-5" />
             </div>
-            <span className="text-lg font-bold text-gray-900 tracking-tight">Feedbite</span>
+            <span className="text-lg font-bold text-gray-900 tracking-tight">
+              Feedbite
+            </span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm font-medium text-gray-600 hover:text-linkedin-blue transition-colors">Features</a>
-            <a href="#how-it-works" className="text-sm font-medium text-gray-600 hover:text-linkedin-blue transition-colors">How it Works</a>
-            <a href="#reviews" className="text-sm font-medium text-gray-600 hover:text-linkedin-blue transition-colors">Reviews</a>
+            <a
+              href="#features"
+              className="text-sm font-medium text-gray-600 hover:text-linkedin-blue transition-colors"
+            >
+              Features
+            </a>
+            <a
+              href="#how-it-works"
+              className="text-sm font-medium text-gray-600 hover:text-linkedin-blue transition-colors"
+            >
+              How it Works
+            </a>
+            <a
+              href="#reviews"
+              className="text-sm font-medium text-gray-600 hover:text-linkedin-blue transition-colors"
+            >
+              Reviews
+            </a>
           </div>
 
           <Button
@@ -56,18 +92,17 @@ const Index = () => {
               transition={{ duration: 0.6 }}
               className="text-center lg:text-left"
             >
-              <Badge className="mb-6 bg-blue-50 text-linkedin-blue hover:bg-blue-100 border-blue-100 px-4 py-1.5 text-sm rounded-full font-medium">
-                <StarIcon className="w-3.5 h-3.5 mr-1.5 fill-linkedin-blue" />
-                #1 LinkedIn Productivity Tool
-              </Badge>
-
               <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.1]">
                 Master Your <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-linkedin-blue to-blue-600">LinkedIn Feed</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-linkedin-blue to-blue-600">
+                  LinkedIn Feed
+                </span>
               </h1>
 
               <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Stop scrolling through walls of text. Get instant, AI-powered summaries of LinkedIn posts with a single click. Save hours every week.
+                Stop scrolling through walls of text. Get instant, AI-powered
+                summaries of LinkedIn posts with a single click. Save hours
+                every week.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
@@ -129,15 +164,23 @@ const Index = () => {
               {/* Floating Badge */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-float border border-gray-100 flex items-center gap-3 z-20"
               >
                 <div className="bg-green-100 p-2 rounded-lg">
                   <ZapIcon className="w-6 h-6 text-green-600" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 font-medium">Time Saved</p>
-                  <p className="text-lg font-bold text-gray-900">2.5 hrs/week</p>
+                  <p className="text-xs text-gray-500 font-medium">
+                    Time Saved
+                  </p>
+                  <p className="text-lg font-bold text-gray-900">
+                    2.5 hrs/week
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
@@ -147,11 +190,20 @@ const Index = () => {
         {/* Trusted By */}
         <section className="py-10 border-y border-gray-100 bg-gray-50/50 mb-24">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <p className="text-sm font-medium text-gray-500 mb-8 uppercase tracking-wider">Trusted by professionals at</p>
+            <p className="text-sm font-medium text-gray-500 mb-8 uppercase tracking-wider">
+              Trusted by professionals at
+            </p>
             <div className="flex flex-wrap justify-center items-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-              {['Google', 'Microsoft', 'Spotify', 'Amazon', 'Netflix'].map((company) => (
-                <span key={company} className="text-xl font-bold text-gray-400 hover:text-gray-900 cursor-default">{company}</span>
-              ))}
+              {["Google", "Microsoft", "Spotify", "Amazon", "Netflix"].map(
+                (company) => (
+                  <span
+                    key={company}
+                    className="text-xl font-bold text-gray-400 hover:text-gray-900 cursor-default"
+                  >
+                    {company}
+                  </span>
+                )
+              )}
             </div>
           </div>
         </section>
@@ -159,8 +211,13 @@ const Index = () => {
         {/* Features Grid */}
         <section id="features" className="max-w-7xl mx-auto px-6 lg:px-8 mb-32">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Everything you need to consume content faster</h2>
-            <p className="text-lg text-gray-600">Feedbite isn't just a summarizer. It's your personal AI research assistant for LinkedIn.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Everything you need to consume content faster
+            </h2>
+            <p className="text-lg text-gray-600">
+              Feedbite isn't just a summarizer. It's your personal AI research
+              assistant for LinkedIn.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -186,7 +243,10 @@ const Index = () => {
         </section>
 
         {/* How it Works */}
-        <section id="how-it-works" className="bg-gray-900 text-white py-24 rounded-[3rem] mx-4 lg:mx-8 mb-24 relative overflow-hidden">
+        <section
+          id="how-it-works"
+          className="bg-gray-900 text-white py-24 rounded-[3rem] mx-4 lg:mx-8 mb-24 relative overflow-hidden"
+        >
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
@@ -194,8 +254,12 @@ const Index = () => {
 
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">How Feedbite Works</h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">Three simple steps to reclaim your time and sanity on LinkedIn.</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                How Feedbite Works
+              </h2>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                Three simple steps to reclaim your time and sanity on LinkedIn.
+              </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-12">
@@ -221,8 +285,13 @@ const Index = () => {
         {/* CTA Section */}
         <section className="max-w-4xl mx-auto px-6 text-center mb-24">
           <div className="bg-gradient-to-b from-blue-50 to-white border border-blue-100 rounded-3xl p-12 shadow-lg">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to upgrade your reading experience?</h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Join thousands of professionals who save time and stay informed with Feedbite.</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Ready to upgrade your reading experience?
+            </h2>
+            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+              Join thousands of professionals who save time and stay informed
+              with Feedbite.
+            </p>
             <Button
               size="lg"
               onClick={handleInstallClick}
@@ -231,7 +300,9 @@ const Index = () => {
               Get Feedbite for Free
               <ArrowRightIcon className="ml-2 w-5 h-5" />
             </Button>
-            <p className="mt-4 text-sm text-gray-500">Free forever • No account required</p>
+            <p className="mt-4 text-sm text-gray-500">
+              Free forever • No account required
+            </p>
           </div>
         </section>
       </main>
@@ -247,13 +318,25 @@ const Index = () => {
           </div>
 
           <div className="flex gap-8 text-sm text-gray-500">
-            <a href="#" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-gray-900 transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-gray-900 transition-colors">Contact</a>
+            <Link
+              to="/privacy"
+              className="hover:text-gray-900 transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <a href="#" className="hover:text-gray-900 transition-colors">
+              Terms of Service
+            </a>
+            <a
+              href="mailto:support@feedbite.app"
+              className="hover:text-gray-900 transition-colors"
+            >
+              Contact
+            </a>
           </div>
 
           <div className="text-sm text-gray-400">
-            © 2024 Feedbite. All rights reserved.
+            © {new Date().getFullYear()} Feedbite. All rights reserved.
           </div>
         </div>
       </footer>
@@ -261,12 +344,24 @@ const Index = () => {
   );
 };
 
-const FeatureCard = ({ icon, title, description, color }: { icon: React.ReactNode, title: string, description: string, color: string }) => (
+const FeatureCard = ({
+  icon,
+  title,
+  description,
+  color,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  color: string;
+}) => (
   <motion.div
     whileHover={{ y: -5 }}
     className="p-8 rounded-2xl bg-white border border-gray-100 shadow-subtle hover:shadow-float transition-all duration-300"
   >
-    <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-6`}>
+    <div
+      className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-6`}
+    >
       {icon}
     </div>
     <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
@@ -274,9 +369,19 @@ const FeatureCard = ({ icon, title, description, color }: { icon: React.ReactNod
   </motion.div>
 );
 
-const Step = ({ number, title, description }: { number: string, title: string, description: string }) => (
+const Step = ({
+  number,
+  title,
+  description,
+}: {
+  number: string;
+  title: string;
+  description: string;
+}) => (
   <div className="text-center relative">
-    <div className="text-6xl font-bold text-gray-800 mb-6 opacity-30 font-mono">{number}</div>
+    <div className="text-6xl font-bold text-gray-800 mb-6 opacity-30 font-mono">
+      {number}
+    </div>
     <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
     <p className="text-gray-400 leading-relaxed">{description}</p>
   </div>
