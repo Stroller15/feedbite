@@ -33,8 +33,8 @@ const Index = () => {
   };
 
   const handleDemoClick = () => {
-    // Replace with your Loom video URL
-    const demoUrl = "https://www.loom.com/share/YOUR_LOOM_VIDEO_ID";
+    const demoUrl =
+      "https://www.loom.com/share/70b0857ff9634c219d758a937529c4a3";
     window.open(demoUrl, "_blank");
   };
 
