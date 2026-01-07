@@ -8,8 +8,10 @@ import {
   LayoutIcon,
   ArrowRightIcon,
   ChromeIcon,
-  StarIcon,
   CheckCircleIcon,
+  SparklesIcon,
+  ClockIcon,
+  PlayCircleIcon,
 } from "lucide-react";
 import ExtensionDemo from "@/components/ExtensionDemo";
 import { Button } from "@/components/ui/button";
@@ -30,6 +32,12 @@ const Index = () => {
     window.open(extensionUrl, "_blank");
   };
 
+  const handleDemoClick = () => {
+    // Replace with your Loom video URL
+    const demoUrl = "https://www.loom.com/share/YOUR_LOOM_VIDEO_ID";
+    window.open(demoUrl, "_blank");
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-linkedin-blue/20 selection:text-linkedin-blue">
       {/* Floating Header */}
@@ -43,14 +51,14 @@ const Index = () => {
         className="fixed top-0 left-0 right-0 z-50 px-6 h-16 flex items-center justify-between transition-all duration-300"
       >
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 cursor-pointer">
             <div className="bg-linkedin-blue text-white p-1.5 rounded-lg">
               <FileTextIcon className="w-5 h-5" />
             </div>
             <span className="text-lg font-bold text-gray-900 tracking-tight">
               Feedbite
             </span>
-          </div>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             <a
@@ -65,12 +73,6 @@ const Index = () => {
             >
               How it Works
             </a>
-            <a
-              href="#reviews"
-              className="text-sm font-medium text-gray-600 hover:text-linkedin-blue transition-colors"
-            >
-              Reviews
-            </a>
           </div>
 
           <Button
@@ -84,102 +86,205 @@ const Index = () => {
 
       <main className="pt-24 pb-16">
         {/* Hero Section */}
-        <section className="px-6 lg:px-8 max-w-7xl mx-auto mb-24 lg:mb-32">
+        <section className="px-6 lg:px-8 max-w-7xl mx-auto mb-24 lg:mb-32 relative overflow-hidden">
+          {/* Background decorations */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-br from-linkedin-blue/5 via-blue-100/20 to-purple-100/10 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute top-40 -left-20 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute top-20 -right-20 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl -z-10"></div>
+
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center lg:text-left"
             >
-              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.1]">
-                Master Your <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-linkedin-blue to-blue-600">
-                  LinkedIn Feed
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-linkedin-blue/10 to-blue-100 border border-linkedin-blue/20 rounded-full px-4 py-1.5 mb-6"
+              >
+                <SparklesIcon className="w-4 h-4 text-linkedin-blue" />
+                <span className="text-sm font-semibold text-linkedin-blue">
+                  AI-Powered Summaries
                 </span>
-              </h1>
+              </motion.div>
 
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.05]"
+              >
+                Master Your{" "}
+                <span className="relative">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-linkedin-blue via-blue-600 to-blue-700">
+                    LinkedIn Feed
+                  </span>
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full"
+                    viewBox="0 0 300 12"
+                    fill="none"
+                  >
+                    <motion.path
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.8, delay: 0.8 }}
+                      d="M2 8C50 4 100 2 150 6C200 10 250 4 298 8"
+                      stroke="url(#gradient)"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="gradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
+                        <stop offset="0%" stopColor="#0A66C2" />
+                        <stop offset="100%" stopColor="#2563eb" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-xl text-gray-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0"
+              >
                 Stop scrolling through walls of text. Get instant, AI-powered
-                summaries of LinkedIn posts with a single click. Save hours
-                every week.
-              </p>
+                summaries of LinkedIn posts with a single click.{" "}
+                <span className="text-gray-900 font-semibold">
+                  Save hours every week.
+                </span>
+              </motion.p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              >
                 <Button
                   size="lg"
                   onClick={handleInstallClick}
-                  className="h-14 px-8 text-lg rounded-full bg-linkedin-blue hover:bg-blue-700 shadow-glow hover:shadow-lg transition-all w-full sm:w-auto"
+                  className="h-14 px-8 text-lg rounded-full bg-linkedin-blue hover:bg-blue-700 shadow-[0_8px_30px_-6px_rgba(10,102,194,0.5)] hover:shadow-[0_12px_40px_-6px_rgba(10,102,194,0.6)] transition-all w-full sm:w-auto group"
                 >
                   <ChromeIcon className="mr-2 w-5 h-5" />
                   Add to Chrome - It's Free
+                  <ArrowRightIcon className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
                   variant="outline"
                   size="lg"
-                  className="h-14 px-8 text-lg rounded-full border-gray-200 hover:bg-gray-50 text-gray-700 w-full sm:w-auto"
+                  onClick={handleDemoClick}
+                  className="h-14 px-8 text-lg rounded-full border-gray-200 hover:bg-gray-50 hover:border-gray-300 text-gray-700 w-full sm:w-auto transition-all group"
                 >
+                  <PlayCircleIcon className="mr-2 w-5 h-5 text-linkedin-blue group-hover:scale-110 transition-transform" />
                   View Demo
                 </Button>
-              </div>
+              </motion.div>
 
-              <div className="flex items-center justify-center lg:justify-start gap-6 text-sm text-gray-500">
+              {/* Feature highlights */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 text-sm text-gray-500"
+              >
                 <div className="flex items-center gap-2">
                   <CheckCircleIcon className="w-4 h-4 text-green-500" />
-                  <span>No credit card required</span>
+                  <span className="text-gray-600">Free forever</span>
                 </div>
+                <div className="hidden sm:block w-px h-4 bg-gray-200"></div>
                 <div className="flex items-center gap-2">
                   <CheckCircleIcon className="w-4 h-4 text-green-500" />
-                  <span>5-star rating</span>
+                  <span className="text-gray-600">No account required</span>
                 </div>
-              </div>
+                <div className="hidden sm:block w-px h-4 bg-gray-200"></div>
+                <div className="flex items-center gap-2">
+                  <CheckCircleIcon className="w-4 h-4 text-green-500" />
+                  <span className="text-gray-600">Privacy focused</span>
+                </div>
+              </motion.div>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 40, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               className="relative"
             >
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-100 to-purple-100 rounded-[2rem] blur-2xl opacity-50 -z-10"></div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 bg-white">
-                <div className="absolute top-0 left-0 right-0 h-12 bg-gray-50 border-b border-gray-100 flex items-center px-4 gap-2 z-10">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-400/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
-                  </div>
-                  <div className="flex-1 text-center">
-                    <div className="bg-white border border-gray-200 rounded-md py-1 px-3 text-xs text-gray-500 inline-flex items-center gap-1.5 mx-auto w-64 justify-center">
-                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                      linkedin.com/feed
-                    </div>
-                  </div>
-                </div>
-                <div className="pt-12 bg-gray-50/50">
-                  <ExtensionDemo />
-                </div>
-              </div>
-
-              {/* Floating Badge */}
+              {/* Glow effect behind browser */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-linkedin-blue/20 via-blue-300/30 to-purple-300/20 rounded-[2rem] blur-2xl opacity-60 -z-10"></div>
               <motion.div
-                animate={{ y: [0, -10, 0] }}
+                animate={{
+                  boxShadow: [
+                    "0 25px 50px -12px rgba(10, 102, 194, 0.15)",
+                    "0 35px 60px -12px rgba(10, 102, 194, 0.25)",
+                    "0 25px 50px -12px rgba(10, 102, 194, 0.15)",
+                  ],
+                }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-float border border-gray-100 flex items-center gap-3 z-20"
+                className="relative rounded-2xl overflow-hidden border border-gray-200/80 bg-white"
               >
-                <div className="bg-green-100 p-2 rounded-lg">
-                  <ZapIcon className="w-6 h-6 text-green-600" />
+                <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-gray-100 to-gray-50 border-b border-gray-200 flex items-center px-4 gap-2 z-10">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-[#FF5F57] shadow-sm"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-sm"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#28CA41] shadow-sm"></div>
+                  </div>
+                  <div className="flex-1 text-center">
+                    <div className="bg-white border border-gray-200 rounded-lg py-1.5 px-4 text-xs text-gray-600 inline-flex items-center gap-2 mx-auto shadow-sm">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                      <span className="font-medium">linkedin.com/feed</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-12 bg-gradient-to-b from-gray-50 to-white">
+                  <ExtensionDemo />
+                </div>
+              </motion.div>
+
+              {/* Floating Badge - Time Saved */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0, y: [0, -8, 0] }}
+                transition={{
+                  opacity: { duration: 0.5, delay: 0.7 },
+                  x: { duration: 0.5, delay: 0.7 },
+                  y: {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  },
+                }}
+                className="absolute bottom-8 -right-4 lg:-right-8 bg-white p-4 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-gray-100 flex items-center gap-3 z-20"
+              >
+                <div className="bg-gradient-to-br from-green-400 to-emerald-500 p-2.5 rounded-xl shadow-lg shadow-green-500/20">
+                  <ClockIcon className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 font-medium">
-                    Time Saved
+                    Avg. Time Saved
                   </p>
-                  <p className="text-lg font-bold text-gray-900">
-                    2.5 hrs/week
+                  <p className="text-xl font-bold text-gray-900">
+                    2.5 hrs
+                    <span className="text-sm font-medium text-gray-500">
+                      /week
+                    </span>
                   </p>
                 </div>
               </motion.div>
@@ -311,8 +416,8 @@ const Index = () => {
       <footer className="bg-white border-t border-gray-100 py-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className="bg-gray-100 p-1.5 rounded-lg">
-              <FileTextIcon className="w-5 h-5 text-gray-900" />
+            <div className="bg-linkedin-blue text-white p-1.5 rounded-lg">
+              <FileTextIcon className="w-5 h-5" />
             </div>
             <span className="text-lg font-bold text-gray-900">Feedbite</span>
           </div>
@@ -324,15 +429,6 @@ const Index = () => {
             >
               Privacy Policy
             </Link>
-            <a href="#" className="hover:text-gray-900 transition-colors">
-              Terms of Service
-            </a>
-            <a
-              href="mailto:support@feedbite.app"
-              className="hover:text-gray-900 transition-colors"
-            >
-              Contact
-            </a>
           </div>
 
           <div className="text-sm text-gray-400">
