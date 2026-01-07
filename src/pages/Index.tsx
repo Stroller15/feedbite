@@ -34,7 +34,7 @@ const Index = () => {
 
   const handleDemoClick = () => {
     const demoUrl =
-      "https://www.loom.com/share/70b0857ff9634c219d758a937529c4a3";
+      "https://www.loom.com/share/7edad4ee5931432b84dbab6ffc331632";
     window.open(demoUrl, "_blank");
   };
 
@@ -325,18 +325,12 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             <FeatureCard
               icon={<ZapIcon className="w-6 h-6 text-amber-500" />}
               title="Instant TL;DR"
               description="Get the gist of any post in seconds. Perfect for skimming through your feed efficiently."
               color="bg-amber-50"
-            />
-            <FeatureCard
-              icon={<LayoutIcon className="w-6 h-6 text-blue-500" />}
-              title="Detailed Insights"
-              description="Need more? Expand to see key takeaways, action items, and hidden gems within the post."
-              color="bg-blue-50"
             />
             <FeatureCard
               icon={<ShieldCheckIcon className="w-6 h-6 text-green-500" />}
@@ -375,20 +369,20 @@ const Index = () => {
               />
               <Step
                 number="02"
-                title="Browse Feed"
-                description="Scroll through your LinkedIn feed as usual. You'll see a subtle 'Summarize' button on posts."
+                title="Add your API key"
+                description="Add your Groq, OpenAI, or Gemini API key (don't worry, your API key will be stored in your local storage)."
               />
               <Step
                 number="03"
                 title="Get Insights"
-                description="Click to instantly reveal a concise summary. Read what matters, skip the fluff."
+                description="Click on the 'Summarize' button on any post to instantly reveal a concise summary. Read what matters, skip the fluff."
               />
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="max-w-4xl mx-auto px-6 text-center mb-24">
+        {/* <section className="max-w-4xl mx-auto px-6 text-center mb-24">
           <div className="bg-gradient-to-b from-blue-50 to-white border border-blue-100 rounded-3xl p-12 shadow-lg">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
               Ready to upgrade your reading experience?
@@ -409,7 +403,7 @@ const Index = () => {
               Free forever • No account required
             </p>
           </div>
-        </section>
+        </section> */}
       </main>
 
       {/* Footer */}
@@ -475,7 +469,7 @@ const Step = ({
   description: string;
 }) => (
   <div className="text-center relative">
-    <div className="text-6xl font-bold text-gray-800 mb-6 opacity-30 font-mono">
+    <div className="text-6xl font-bold text-gray-800 mb-6 font-mono">
       {number}
     </div>
     <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
