@@ -34,7 +34,7 @@ const Index = () => {
 
   const handleDemoClick = () => {
     const demoUrl =
-      "https://www.loom.com/share/7edad4ee5931432b84dbab6ffc331632";
+      "https://www.loom.com/share/c5028891276d46d983ca7ea387eac51a";
     window.open(demoUrl, "_blank");
   };
 
